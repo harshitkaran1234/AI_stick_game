@@ -1,0 +1,85 @@
+// simple rand AI
+				/*
+				int AI_flag = 0 ;
+				int rm_temp;  
+				while ( AI_flag == 0 )
+				{
+					rm_temp = rand()%3+1;
+					bool check = AI_remove(stick_amount, rm_temp); 
+					if (check == true) 
+					{
+						AI_flag = 1; 
+					}
+				}
+				stick_amount = stick_amount-rm_temp; 
+				cout << "Player 2: How many sticks do you remove (1-3)?" << rm_temp << endl; */
+
+				
+				//DURING AI TURN 
+				
+				/*
+				// loop initialization
+				int rm_flag_2 = 0; 
+				list<int>::iterator it;
+				int total_elem; 
+				int list_index; 
+				int rm_temp; 
+				
+
+				// loop until get a number that is playable
+				
+				while(rm_flag_2 == 0) 
+				{
+					// iterator 
+					it = AI_map[stick_amount].begin(); 
+					//get the total number of elements 
+					total_elem = AI_map[stick_amount].size(); 
+					// generate random number within index
+					list_index = rand()%total_elem; 
+					cout << "RAND ELEM: " << list_index; 
+				
+					// update iterator
+					for (int i= 0 ; i < list_index; i++) 
+						it++;  
+	
+					// save value that is going to be removed
+					rm_temp = *it; 
+					cout << "   Value : " << rm_temp << endl; 
+
+					// check if valid value 
+					// check if can after removal if the value is neg
+				
+					int temp;  
+					temp = stick_amount-rm_temp; 
+					if ( temp >= 0 ) 
+					{
+						rm_flag_2 = 1;  
+					}
+				}
+				
+				//remove number from list
+				AI_map[stick_amount].erase(it); 
+				
+	
+				//put number into temp map 
+				temp_AI_map[stick_amount].push_back(rm_temp);
+
+				//creating a temp list to save the indices 
+				temp_list.push_back(stick_amount); 
+
+
+				//create another list (must list) 
+				// for indices with no number left
+				if (AI_map[stick_amount].empty() == true)
+				{
+					must_list.push_back(stick_amount); 
+				}
+
+			
+				// actually subtract the value from the total 
+				stick_amount = stick_amount-rm_temp; 
+
+				// printout the value
+				cout << "Player 2: How many sticks do you remove (1-3)?" << rm_temp << endl;
+				
+			} */
