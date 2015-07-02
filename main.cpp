@@ -82,7 +82,7 @@ int style() {
 	{
 		cout << "Enter Here: " ; 
 		cin >> ret; 
-		if (ret >=1 && ret <= 3) 
+		if (ret >=1 && ret <= 4) 
 		{
 			flag =1;
 
@@ -179,7 +179,7 @@ int main(){
 	cout << "Welcome to the game of sticks!" << endl; 
 
 
-	cout << "Select an option:" << endl << "1)human vs. human" << endl << "2)human vs. AI" << endl << "3) human vs. pre-trained AI" << endl; 
+	cout << "Select an option:" << endl << "1)human vs. human" << endl << "2)human vs. AI" << endl << "3) human vs. pre-trained AI" << endl << "4) human vs. constant time mathematical solution " << endl; 
 	int choice = style(); 
 	
 	 
@@ -639,6 +639,103 @@ int main(){
 		again = play_again(); 
 		
 		}
+
+
+	}
+
+
+
+	if ( choice == 4) 
+	{
+		
+		bool again = true; 
+		while (again == true)
+		{
+		
+
+		// ask for stick amount; 
+		int stick_amount = stick_ask();
+
+				
+		cout << "Computer will be player two" << endl; 
+		cout << "Randomly selecting player to start first ..."<<endl; 
+		int win = 0 ;
+		//randoms who starts first 
+		srand(time(NULL)); 
+		int player = rand()%2+1;  
+		cout << "Player " << player << " starts" << endl; 	
+
+
+		//while loop until someone wins 
+		while (win == 0 ) 
+		{		
+			cout << "There are " << stick_amount << " sticks left. " << endl;
+			if (player == 1) 
+			{
+				int val = player_remove(stick_amount, player); 
+				stick_amount = stick_amount-val; 
+			}
+
+			if (player == 2)
+			{
+				int rm_temp; 
+				int remain = stick_amount%4; 
+				if (remain == 0)
+					rm_temp = 3; 
+				else if (remain == 1) 
+				{
+					int AI_4_flag = 0; 
+					while(AI_4_flag == 0) 
+					{
+						srand(time(NULL)) ; 
+						rm_temp = rand()%3+ 1; 
+						bool AI_4_check = AI_remove(stick_amount, rm_temp); 
+						if (AI_4_check == true) 
+							AI_4_flag = 1; 
+					}
+
+				}
+				else if (remain == 2) 
+					rm_temp = 1; 
+				else
+					rm_temp = 2; 
+				stick_amount = stick_amount-rm_temp; 
+				cout << "Computer: How many sticks do you remove (1-3)?" << rm_temp << endl;
+			}
+
+
+			//check if player lost 
+			if (stick_amount == 0 ) 
+			{
+				// print out winner and loser 
+				cout << "Player " << player << " Lost!" << endl; 
+				if (player == 1) 
+				{
+					win = 2; 
+				}
+				else 
+				{
+					win = 1; 
+				}
+				cout << "Player " << win << " Won :) " << endl; 
+			}
+
+
+			//switch player 
+			if (player ==1 ) 
+				player = 2; 
+			else
+				player =1; 
+
+			cout << endl; 
+		 
+		}
+		
+		again = play_again(); 
+		
+		}
+
+
 
 
 	}
