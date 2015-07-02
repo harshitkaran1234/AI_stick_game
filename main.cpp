@@ -260,7 +260,7 @@ int main(){
 		while (again == true)
 		{
 		
-		for (int i = 1; i<=10 ; i++) 
+		/*for (int i = 1; i<=10 ; i++) 
 		{
 			cout << "Number: " << i << "   " ; 
 			for (list<int>::iterator it = AI_map[i].begin(); it != AI_map[i].end(); it++) 
@@ -268,7 +268,7 @@ int main(){
 				cout << *it << " " ; 
 			}
 			cout << endl; 
-		}
+		}*/
 
 
 		// ask for stick amount; 
@@ -375,6 +375,7 @@ int main(){
 
 	if (choice == 3) 
 	{
+		cout << "Training AI ..... " << endl; 
 		srand(time(NULL)); 
 		// initialization for AI 
 		// creating AI map 1
@@ -401,7 +402,7 @@ int main(){
 		
 
 		// amount of training 
-		int train_time = 1000; 
+		int train_time = 10000; 
 
 		while (train_time > 0 ) 
 		{
@@ -461,7 +462,7 @@ int main(){
 				else
 					com_player =1; 
 			}
-			cout << "GAME END " << endl; 
+			//cout << "GAME END " << efndl; 
 			
 			int AI_learn_int; 
 			// AT THE END OF THE GAME 
@@ -508,7 +509,7 @@ int main(){
 			train_time--; 
 
 
-			cout << train_time << endl; 
+			//cout << train_time << endl; 
 		}
 
 
@@ -534,7 +535,111 @@ int main(){
 			cout << endl; 
 		}
 		*/
+		bool again = true; 
+		while (again == true)
+		{
+
+
+		// ask for stick amount; 
+		int stick_amount = stick_ask();
+
+				
+		cout << "Computer will be player two" << endl; 
+		cout << "Randomly selecting player to start first ..."<<endl; 
+		int win = 0 ;
+		//randoms who starts first 
+		srand(time(NULL)); 
+		int player = rand()%2+1;  
+		cout << "Player " << player << " starts" << endl; 	
+
+
+		// initialization for game 
+
+		// initialization of temp AI map 
+		map<int, list<int> > temp_AI_map ; 
+		// initialization of temp indices vector
+		list<int> temp_list ; 
+
+
+		//while loop until someone wins 
+		while (win == 0 ) 
+		{		
+			cout << "There are " << stick_amount << " sticks left. " << endl;
+			if (player == 1) 
+			{
+				int val = player_remove(stick_amount, player); 
+				stick_amount = stick_amount-val; 
+			}
+
+			if (player == 2)
+			{
+				int rm_temp; 
+				rm_temp = AI_play(AI_map, temp_AI_map, temp_list, stick_amount); 
+				cout << "Computer: How many sticks do you remove (1-3)?" << rm_temp << endl;
+			}
+
+
+			//check if player lost 
+			if (stick_amount == 0 ) 
+			{
+				// print out winner and loser 
+				cout << "Player " << player << " Lost!" << endl; 
+				if (player == 1) 
+				{
+					win = 2; 
+				}
+				else 
+				{
+					win = 1; 
+				}
+				cout << "Player " << win << " Won :) " << endl; 
+			}
+
+
+			//switch player 
+			if (player ==1 ) 
+				player = 2; 
+			else
+				player =1; 
+
+			cout << endl; 
+		 
+		}
+
+
+		int AI_learn_int; 
+		// AT THE END OF THE GAME 
+		// IF AI WON ; add all numbers in indices back into AI_map
+		if (win == 2) 
+		{	
+			AI_learn_int = 2; 
+		}
+		// IF AI LOST; add back the numbers once 
+		if (win == 1) 
+		{
+			AI_learn_int = 1; 
+		}
 		
+
+		//add back numbers into AI_map
+		while (temp_list.empty() == false) 
+		{	
+				// get index and remove the index
+				int temp_index = temp_list.front(); 
+				temp_list.pop_front(); 
+				// get the value 
+				int temp_val = temp_AI_map[temp_index].front(); 
+				// add back in once or twice depending on win or lost 
+				for (int i= 0 ; i < AI_learn_int; i ++) 
+				{
+					AI_map[temp_index].push_back(temp_val); 
+				}
+		}
+
+		again = play_again(); 
+		
+		}
+
 
 	}
 	return 0; 
