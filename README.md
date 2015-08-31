@@ -11,3 +11,5 @@ and solvable solution, however it was a simple way for me
 to get started with AI. The project is based off an 
 assignment I found online from 
 http://nifty.stanford.edu/2014/laaksonen-vihavainen-game-of-sticks/handout.html
+
+![alt tag](https://github.com/nliampisan/AI_stick_game/blob/master/Screenshot.png)
